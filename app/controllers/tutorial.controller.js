@@ -1,11 +1,11 @@
 const db = require('../models');
-const { Tutorial } = db;
+const Tutorial = db.tutorials;
 const Op = db.Sequelize.Op;
 
 // Create and Save a new Tutorial
 exports.create = (req, res) => {
-  // Validate request
-  if (!res.body.title) {
+  // Validate requests
+  if (!req.body.title) {
     res.status(400).send({
       message: `Content can not be empty!`,
     });
@@ -24,7 +24,7 @@ exports.create = (req, res) => {
     .then((data) => {
       res.send(data);
     })
-    .cath((err) => {
+    .catch((err) => {
       res.status(500).send({
         message:
           err.message || `Some error occurred while creating the Tutorial.`,
